@@ -34,3 +34,9 @@ cp .env.example .env
 ```bash
 docker compose up -d
 ```
+
+## ドキュメント
+
+- [機能仕様書](docs/spec.md)
+- [ユーザーストーリー](docs/user-stories.md)
+- [ER 図（Mermaid）](docs/erd.md)
