@@ -40,3 +40,17 @@ docker compose up -d
 - [機能仕様書](docs/spec.md)
 - [ユーザーストーリー](docs/user-stories.md)
 - [ER 図（Mermaid）](docs/erd.md)
+- [Issue 計画](docs/issue.md)
+- [OpenAPI 3.1 仕様](docs/openapi.yaml) — API はこの仕様に準拠して実装する
+
+### OpenAPI 仕様のプレビュー
+
+`docs/openapi.yaml` を Swagger UI / Redoc などで閲覧する例:
+
+```bash
+# Redocly CLI でブラウザプレビュー
+npx @redocly/cli@latest preview-docs docs/openapi.yaml
+
+# Redocly CLI で lint
+npx @redocly/cli@latest lint docs/openapi.yaml
+```
