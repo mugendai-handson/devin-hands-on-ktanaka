@@ -1,22 +1,37 @@
 import { z } from "zod";
 
+const projectKeySchema = z
+  .string()
+  .regex(/^[A-Z0-9]{2,10}$/, "プロジェクトキーは英大文字と数字 2〜10 文字で入力してください");
+
+const projectColorSchema = z
+  .string()
+  .regex(/^#[0-9A-Fa-f]{6}$/, "アイコン色は #RRGGBB 形式で入力してください");
+
 export const createProjectSchema = z.object({
   name: z.string().min(1, "プロジェクト名は必須です").max(100, "プロジェクト名は100文字以内で入力してください"),
   description: z.string().max(1000, "説明は1000文字以内で入力してください").optional(),
-  key: z
-    .string()
-    .regex(/^[A-Z0-9]{2,10}$/, "プロジェクトキーは英大文字と数字 2〜10 文字で入力してください")
-    .optional(),
+  key: projectKeySchema.optional(),
+  color: projectColorSchema.optional(),
 });
 
 export const updateProjectSchema = z
   .object({
     name: z.string().min(1, "プロジェクト名は必須です").max(100, "プロジェクト名は100文字以内で入力してください").optional(),
     description: z.string().max(1000, "説明は1000文字以内で入力してください").nullable().optional(),
+    key: projectKeySchema.optional(),
+    color: projectColorSchema.nullable().optional(),
   })
-  .refine((data) => data.name !== undefined || data.description !== undefined, {
-    message: "更新する項目を指定してください",
-  });
+  .refine(
+    (data) =>
+      data.name !== undefined ||
+      data.description !== undefined ||
+      data.key !== undefined ||
+      data.color !== undefined,
+    {
+      message: "更新する項目を指定してください",
+    },
+  );
 
 export const listProjectsQuerySchema = z.object({
   page: z.coerce.number().int().min(1).default(1),
