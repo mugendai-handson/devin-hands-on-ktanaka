@@ -39,6 +39,7 @@ docker compose up -d
 
 - [機能仕様書](docs/spec.md)
 - [ユーザーストーリー](docs/user-stories.md)
+- [ER 図（Mermaid）](docs/erd.md)
 - [Issue 計画](docs/issue.md)
 - [OpenAPI 3.1 仕様](docs/openapi.yaml) — API はこの仕様に準拠して実装する
 
