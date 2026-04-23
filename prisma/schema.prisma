@@ -37,6 +37,7 @@ model Project {
   name        String
   description String?
   key         String
+  color       String?
   ownerId     String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

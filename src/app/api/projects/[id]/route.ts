@@ -140,6 +140,8 @@ export const PATCH = async (
         ...(parsed.data.description !== undefined && {
           description: parsed.data.description,
         }),
+        ...(parsed.data.key !== undefined && { key: parsed.data.key }),
+        ...(parsed.data.color !== undefined && { color: parsed.data.color }),
       },
       include: {
         _count: { select: { tasks: true, members: true } },
