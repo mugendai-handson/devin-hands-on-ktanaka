@@ -1,0 +1,1186 @@
+[
+  {
+    "body": "## 概要\n\n全 API 実装完了後、`docs/openapi.yaml` を最新の実装と同期させ、ドキュメントを完成させる。\n\n## Acceptance Criteria\n\n- [ ] 全エンドポイントの実装と OpenAPI 定義が一致\n- [ ] リクエスト/レスポンススキーマを最新 zod と同期\n- [ ] エラーレスポンスの一貫性を確認\n- [ ] 認証スキームの記述を確認\n- [ ] OpenAPI ビューア（Swagger UI や Redoc）での表示確認\n- [ ] `README.md` から OpenAPI へのリンクが最新\n\n## 技術的な参考情報\n\n- 前提: Phase 1〜4 の全 API 実装完了後\n- 仕様書: `docs/spec.md` の「API 設計」セクション\n- 既存: `docs/openapi.yaml`（#8）",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZwA",
+        "name": "phase:4",
+        "description": "",
+        "color": "EF4444"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa1w",
+        "name": "type:docs",
+        "description": "ドキュメント",
+        "color": "0EA5E9"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa_w",
+        "name": "size:S",
+        "description": "3〜5 ACU",
+        "color": "93C5FD"
+      }
+    ],
+    "number": 50,
+    "state": "OPEN",
+    "title": "OpenAPI 仕様の最終同期"
+  },
+  {
+    "body": "## 概要\n\n`/settings` 画面でユーザー自身のプロフィール・テーマ・通知設定を編集可能にする。\n\n## 対応ユーザーストーリー\n\nUS-30（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `/settings` ページ\n- [ ] 編集項目: 名前、アバター、テーマ（LIGHT/DARK/SYSTEM）、メール通知設定、言語\n- [ ] パスワード変更フォーム（現在/新規/確認）\n- [ ] Server Action + zod + useActionState\n- [ ] 保存後にトースト通知\n- [ ] メールアドレスは変更不可（表示のみ）\n\n## 技術的な参考情報\n\n- Prisma: `User` モデル\n- 関連: #38（i18n）, #33（ダークモード）, #37（メール通知設定）\n- 仕様書: `docs/spec.md` F17 ユーザー",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZwA",
+        "name": "phase:4",
+        "description": "",
+        "color": "EF4444"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa_w",
+        "name": "size:S",
+        "description": "3〜5 ACU",
+        "color": "93C5FD"
+      }
+    ],
+    "number": 49,
+    "state": "OPEN",
+    "title": "プロフィール設定画面"
+  },
+  {
+    "body": "## 概要\n\nADMIN 権限ユーザーが重要操作（ログイン、プロジェクト作成、メンバー変更等）の監査ログを確認できる画面を実装。\n\n## 対応ユーザーストーリー\n\nUS-29（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `/admin/audit` 画面（ADMIN のみアクセス可）\n- [ ] ログ書き込みユーティリティ `src/lib/audit.ts`\n- [ ] 記録対象: ログイン、ログアウト、プロジェクト CRUD、メンバー招待/権限変更、ユーザー作成\n- [ ] フィルター: アクション種別、ユーザー、期間\n- [ ] ページング\n- [ ] ADMIN 以外はアクセス拒否\n\n## 技術的な参考情報\n\n- Prisma: `AuditLog` モデル\n- 既存 proxy: `/admin` 配下の保護済み\n- 仕様書: `docs/spec.md` F16 監査ログ",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZwA",
+        "name": "phase:4",
+        "description": "",
+        "color": "EF4444"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaMw",
+        "name": "priority:low",
+        "description": "",
+        "color": "6B7280"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 48,
+    "state": "OPEN",
+    "title": "監査ログ（管理者画面）"
+  },
+  {
+    "body": "## 概要\n\nダークモードを全画面で完成させ、ユーザー設定で保存。\n\n## 対応ユーザーストーリー\n\nUS-28（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `next-themes` による切替は既存（ヘッダーボタン）\n- [ ] 全画面・全コンポーネントで色が適切に切り替わるかレビュー\n- [ ] グラフ（recharts）のダークモード対応（#31 とも連携）\n- [ ] OKLCH カラートークンの不足分を補完\n- [ ] `User.theme` フィールドに保存（LIGHT / DARK / SYSTEM）\n- [ ] 次回ログイン時に復元\n\n## 技術的な参考情報\n\n- 既存: `src/components/providers/ThemeProvider.tsx`\n- globals.css の OKLCH トークン\n- Prisma: `User.theme` フィールド\n- 仕様書: `docs/spec.md` F15 ダークモード",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZwA",
+        "name": "phase:4",
+        "description": "",
+        "color": "EF4444"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaUA",
+        "name": "type:frontend",
+        "description": "UI・コンポーネント・画面",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa_w",
+        "name": "size:S",
+        "description": "3〜5 ACU",
+        "color": "93C5FD"
+      }
+    ],
+    "number": 47,
+    "state": "OPEN",
+    "title": "ダークモード"
+  },
+  {
+    "body": "## 概要\n\nプロジェクト / タスク / カンバン / ダッシュボード / 通知等、残りの全画面を翻訳。\n\n## 対応ユーザーストーリー\n\nUS-27（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] 全画面のテキストを `messages/ja.json` / `en.json` に移行\n- [ ] ハードコードされた日本語を残さない\n- [ ] バリデーションメッセージも翻訳\n- [ ] トーストメッセージも翻訳\n- [ ] Enum のラベル（ステータス・優先度）を翻訳\n\n## 技術的な参考情報\n\n- 前提: #38（i18n セットアップ）\n- 仕様書: `docs/spec.md` F14 i18n",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZwA",
+        "name": "phase:4",
+        "description": "",
+        "color": "EF4444"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaUA",
+        "name": "type:frontend",
+        "description": "UI・コンポーネント・画面",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 46,
+    "state": "OPEN",
+    "title": "多言語対応（残りの全画面翻訳）"
+  },
+  {
+    "body": "## 概要\n\n`next-intl` を導入し、ja / en の多言語対応基盤を整備。認証画面 + レイアウトを最初に翻訳。\n\n## 対応ユーザーストーリー\n\nUS-27（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `next-intl` 導入\n- [ ] `src/messages/ja.json` / `en.json` 作成\n- [ ] ロケール切替 UI（ヘッダー or 設定）\n- [ ] Cookie でロケール保持\n- [ ] 認証画面（ログイン / サインアップ）翻訳\n- [ ] レイアウト（サイドバー / ヘッダー）翻訳\n- [ ] 日付・数値のロケール対応\n\n## 技術的な参考情報\n\n- next-intl: https://next-intl.dev/\n- 仕様書: `docs/spec.md` F14 i18n",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZwA",
+        "name": "phase:4",
+        "description": "",
+        "color": "EF4444"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 45,
+    "state": "OPEN",
+    "title": "多言語対応セットアップ + 認証・レイアウト翻訳"
+  },
+  {
+    "body": "## 概要\n\n重要な通知（メンション・タスク割り当て等）をメールでも送信する。\n\n## 対応ユーザーストーリー\n\nUS-26（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] Resend を導入 (`resend` パッケージ + `RESEND_API_KEY`)\n- [ ] メールテンプレート（React Email もしくは簡易HTML）\n- [ ] 送信対象: 割り当て、メンション、期限リマインダ\n- [ ] ユーザー設定でメール通知のオン/オフを切替可能\n- [ ] 失敗時は通知レコードは残してログ出力\n- [ ] `.env.example` に `RESEND_API_KEY` 記載済み\n\n## 技術的な参考情報\n\n- Resend: https://resend.com/\n- 前提: #34（通知生成）\n- 仕様書: `docs/spec.md` F13 通知",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZwA",
+        "name": "phase:4",
+        "description": "",
+        "color": "EF4444"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaeQ",
+        "name": "type:backend",
+        "description": "API・DB・Server Actions",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 44,
+    "state": "OPEN",
+    "title": "メール通知（Resend）"
+  },
+  {
+    "body": "## 概要\n\n通知の既読/未読の切替と、一括既読を可能にする。\n\n## 対応ユーザーストーリー\n\nUS-25（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `PATCH /api/notifications/[id]/read`: 個別既読/未読切替\n- [ ] 一括既読 API（例: `PATCH /api/notifications/read-all`）\n- [ ] 通知一覧画面で個別/一括操作できる UI\n- [ ] 通知クリックで自動既読化\n- [ ] ヘッダーの未読バッジが即時更新（楽観的更新）\n\n## 技術的な参考情報\n\n- 前提: #34, #35\n- Prisma: `Notification.read` フィールド",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZwA",
+        "name": "phase:4",
+        "description": "",
+        "color": "EF4444"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa_w",
+        "name": "size:S",
+        "description": "3〜5 ACU",
+        "color": "93C5FD"
+      }
+    ],
+    "number": 43,
+    "state": "OPEN",
+    "title": "通知の既読管理（既読/未読切替 + 一括既読）"
+  },
+  {
+    "body": "## 概要\n\nヘッダー通知ベルの未読バッジと、`/notifications` 画面の通知一覧 UI を実装。\n\n## 対応ユーザーストーリー\n\nUS-25（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] ヘッダーベルアイコンに未読数バッジ\n- [ ] ベルクリックでポップオーバー（最新N件）\n- [ ] ポップオーバーから通知クリックで該当タスクへ遷移\n- [ ] `/notifications` 通知一覧画面\n- [ ] 通知タイプ別アイコン表示\n- [ ] 既読/未読の視覚的区別\n- [ ] 空状態の表示\n\n## 技術的な参考情報\n\n- 既存: `src/components/layout/Header.tsx` の通知ベル（placeholder）\n- 前提: #34（通知生成 API）\n- 仕様書: `docs/spec.md` F13 通知",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZwA",
+        "name": "phase:4",
+        "description": "",
+        "color": "EF4444"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaUA",
+        "name": "type:frontend",
+        "description": "UI・コンポーネント・画面",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 42,
+    "state": "OPEN",
+    "title": "通知 UI（ベルアイコン + 通知一覧画面）"
+  },
+  {
+    "body": "## 概要\n\nタスク/コメント/メンション等のイベントで通知レコードを生成する仕組みを実装。\n\n## 対応ユーザーストーリー\n\nUS-25（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] 通知生成ユーティリティ `src/lib/notifications.ts`\n- [ ] トリガー対象:\n  - タスク割り当て（ASSIGNED）\n  - コメント投稿（COMMENT）\n  - メンション（MENTION）\n  - ステータス変更（STATUS_CHANGE）\n  - 期限リマインダ（DUE_SOON）※スケジュール実行は任意\n- [ ] Server Actions / API からユーティリティを呼び出し\n- [ ] 自分自身の操作では通知を生成しない\n- [ ] `GET /api/notifications`: 通知一覧取得\n\n## 技術的な参考情報\n\n- Prisma: `Notification` モデル + `NotificationType` Enum\n- 仕様書: `docs/spec.md` F13 通知\n- 関連: #24（メンション）, #17（ステータス変更）, #23（コメント）",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZwA",
+        "name": "phase:4",
+        "description": "",
+        "color": "EF4444"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaeQ",
+        "name": "type:backend",
+        "description": "API・DB・Server Actions",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 41,
+    "state": "OPEN",
+    "title": "通知生成 API + トリガー"
+  },
+  {
+    "body": "## 概要\n\nガントチャートにドラッグで期間変更、グルーピング（担当者/カテゴリ）、依存関係矢印を実装。\n\n## 対応ユーザーストーリー\n\nUS-17（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] タスク帯のドラッグで startDate / dueDate 変更\n- [ ] 帯の左右端ドラッグで期間延長/短縮\n- [ ] グルーピング切替（担当者 / カテゴリ / なし）\n- [ ] 親子タスク（サブタスク）を階層表示\n- [ ] 楽観的更新で即座に UI 反映\n- [ ] VIEWER は操作不可\n\n## 技術的な参考情報\n\n- 前提: #32（ガントチャート基本表示）\n- 仕様書: `docs/spec.md` F06 ガントチャート",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZwA",
+        "name": "phase:4",
+        "description": "",
+        "color": "EF4444"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaUA",
+        "name": "type:frontend",
+        "description": "UI・コンポーネント・画面",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 40,
+    "state": "OPEN",
+    "title": "ガントチャート（インタラクション + グルーピング）"
+  },
+  {
+    "body": "## 概要\n\nプロジェクトのタスクをガントチャートで表示する基本 UI を実装。\n\n## 対応ユーザーストーリー\n\nUS-17（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `/projects/[id]/gantt` ページ\n- [ ] 横軸: 日付、縦軸: タスク\n- [ ] タスクの開始日〜期限を帯で表示\n- [ ] 今日の日付ラインを強調\n- [ ] 期間の表示切替（週/月/四半期）\n- [ ] ステータスに応じた色\n- [ ] タスク帯クリックで詳細画面へ遷移\n\n## 技術的な参考情報\n\n- Prisma: `Task.startDate` / `Task.dueDate` フィールド\n- `src/components/gantt/GanttChart.tsx` を新規作成\n- 仕様書: `docs/spec.md` F06 ガントチャート\n- 拡張: #33 でインタラクション追加",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZwA",
+        "name": "phase:4",
+        "description": "",
+        "color": "EF4444"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaUA",
+        "name": "type:frontend",
+        "description": "UI・コンポーネント・画面",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBcGw",
+        "name": "size:L",
+        "description": "8〜10 ACU（1セッション上限）",
+        "color": "FCA5A5"
+      }
+    ],
+    "number": 39,
+    "state": "OPEN",
+    "title": "ガントチャート（基本表示）"
+  },
+  {
+    "body": "## 概要\n\nダッシュボードにグラフ（recharts）とアクティビティフィードを追加して可視化を強化。\n\n## 対応ユーザーストーリー\n\nUS-18（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `recharts` を導入\n- [ ] ステータス別タスク数の円グラフ\n- [ ] 週次タスク完了数の折れ線/棒グラフ\n- [ ] 優先度別タスク分布\n- [ ] 最近のアクティビティフィード（全プロジェクト横断）\n- [ ] ダークモードでのグラフ配色対応\n\n## 技術的な参考情報\n\n- 前提: #30（ダッシュボード サマリー + タスク一覧）\n- recharts: https://recharts.org/\n- 仕様書: `docs/spec.md` F07 ダッシュボード",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZwA",
+        "name": "phase:4",
+        "description": "",
+        "color": "EF4444"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaUA",
+        "name": "type:frontend",
+        "description": "UI・コンポーネント・画面",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 38,
+    "state": "OPEN",
+    "title": "ダッシュボード（グラフ + アクティビティフィード）"
+  },
+  {
+    "body": "## 概要\n\nダッシュボード画面のサマリー情報とタスク一覧を実装。横断的な状況把握ができるようにする。\n\n## 対応ユーザーストーリー\n\nUS-18（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `/dashboard` ページの本実装\n- [ ] サマリーカード: 自分の未完了タスク数、期限超過、今週期限、担当中プロジェクト数\n- [ ] 自分の担当タスク一覧（優先度順）\n- [ ] 最近のアクティビティ（自分が関与したもの）\n- [ ] 各セクションから該当画面へ遷移\n- [ ] Server Component + Prisma 直接取得\n\n## 技術的な参考情報\n\n- 既存 Dashboard: `src/app/(main)/dashboard/page.tsx`（プレースホルダ）\n- 関連: `src/components/dashboard/StatCard.tsx`（新規）\n- 仕様書: `docs/spec.md` F07 ダッシュボード\n- グラフ実装: #31 で拡張",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZrQ",
+        "name": "phase:3",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 37,
+    "state": "OPEN",
+    "title": "ダッシュボード（サマリーカード + タスク一覧）"
+  },
+  {
+    "body": "## 概要\n\nプロジェクト全体のアクティビティを一覧表示するフィード画面を実装。\n\n## 対応ユーザーストーリー\n\nUS-24（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `GET /api/projects/[id]/activities`: プロジェクトのアクティビティ一覧\n- [ ] プロジェクト配下のタスクの全アクティビティを時系列で表示\n- [ ] 無限スクロール or ページング\n- [ ] アクション種別アイコン + ユーザーアバター + 時刻 + タスクへのリンク\n- [ ] プロジェクト内のタブ（カンバン/リスト/ガント/アクティビティ）から遷移\n\n## 技術的な参考情報\n\n- 前提: #28（タスクのアクティビティログ）\n- Prisma: `ActivityLog` モデル\n- 仕様書: `docs/spec.md` F12 アクティビティログ",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZrQ",
+        "name": "phase:3",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa_w",
+        "name": "size:S",
+        "description": "3〜5 ACU",
+        "color": "93C5FD"
+      }
+    ],
+    "number": 36,
+    "state": "OPEN",
+    "title": "アクティビティフィード（プロジェクト）"
+  },
+  {
+    "body": "## 概要\n\nタスクの変更履歴（作成・更新・ステータス変更・担当者変更・コメント投稿・ファイル添付）を記録・表示。\n\n## 対応ユーザーストーリー\n\nUS-23（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `GET /api/tasks/[taskId]/activities`: タスクのアクティビティ一覧\n- [ ] Server Actions や PATCH API 内で `ActivityLog` を作成するユーティリティ\n- [ ] 記録対象: CREATE / UPDATE / STATUS_CHANGE / ASSIGNEE_CHANGE / COMMENT / ATTACHMENT\n- [ ] 変更前後の値を記録（例: status: TODO → IN_PROGRESS）\n- [ ] タスク詳細画面にアクティビティタイムライン表示\n- [ ] ユーザーアバター + 時刻 + 変更内容\n\n## 技術的な参考情報\n\n- Prisma: `ActivityLog` モデル + `ActivityAction` Enum\n- 前提: #13（タスク詳細画面）\n- 仕様書: `docs/spec.md` F12 アクティビティログ",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZrQ",
+        "name": "phase:3",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 35,
+    "state": "OPEN",
+    "title": "アクティビティログ（タスク）"
+  },
+  {
+    "body": "## 概要\n\n検索結果画面/ドロップダウンにフィルター UI を追加。ステータス・担当者・優先度・カテゴリで絞り込む。\n\n## 対応ユーザーストーリー\n\nUS-22（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] 検索結果にフィルター UI（ステータス、優先度、担当者、カテゴリ、プロジェクト）\n- [ ] URL クエリパラメータで状態保持\n- [ ] 複数フィルタの AND 条件\n- [ ] フィルタークリアボタン\n- [ ] レスポンシブ対応\n\n## 技術的な参考情報\n\n- 前提: #26（グローバル検索）\n- 既存: リストビューのフィルタ実装を参考（#20）",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZrQ",
+        "name": "phase:3",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaUA",
+        "name": "type:frontend",
+        "description": "UI・コンポーネント・画面",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa_w",
+        "name": "size:S",
+        "description": "3〜5 ACU",
+        "color": "93C5FD"
+      }
+    ],
+    "number": 34,
+    "state": "OPEN",
+    "title": "検索フィルター"
+  },
+  {
+    "body": "## 概要\n\nヘッダー検索バーからタスクを横断検索できる機能を実装。\n\n## 対応ユーザーストーリー\n\nUS-22（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `GET /api/search?q=...`: タスクのタイトル・説明・番号を横断検索\n- [ ] ヘッダー検索バーで入力（現状は placeholder なので有効化）\n- [ ] インクリメンタル検索（debounce 300ms）\n- [ ] 結果はドロップダウンで表示（タスク番号・タイトル・プロジェクト名）\n- [ ] 結果クリックでタスク詳細へ遷移\n- [ ] 検索スコープ: 自分が参加中のプロジェクトのみ\n- [ ] 0件時のメッセージ\n\n## 技術的な参考情報\n\n- 既存: `src/components/layout/Header.tsx` の検索バー\n- 仕様書: `docs/spec.md` F11 検索\n- Prisma: `contains` / `mode: 'insensitive'` でフルテキスト検索",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZrQ",
+        "name": "phase:3",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 33,
+    "state": "OPEN",
+    "title": "グローバル検索"
+  },
+  {
+    "body": "## 概要\n\nタスクにファイルを添付・ダウンロード・削除できる機能を実装。\n\n## 対応ユーザーストーリー\n\nUS-21（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `POST /api/tasks/[taskId]/attachments`: ファイルアップロード\n- [ ] `DELETE /api/attachments/[attachmentId]`: 削除\n- [ ] ファイル保存先: ローカル（`public/uploads/` もしくは専用ディレクトリ）\n- [ ] ファイルサイズ上限（例: 10MB）\n- [ ] 許可する拡張子（画像、PDF、ドキュメント等）\n- [ ] タスク詳細画面に添付ファイルセクション\n- [ ] ドラッグ&ドロップでアップロード\n- [ ] 画像はサムネイル表示、それ以外はアイコン表示\n- [ ] ダウンロードリンク\n- [ ] VIEWER ロールは添付不可\n\n## 技術的な参考情報\n\n- Prisma: `Attachment` モデル\n- 前提: #13（タスク詳細画面）\n- 仕様書: `docs/spec.md` F10 ファイル添付",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZrQ",
+        "name": "phase:3",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBcGw",
+        "name": "size:L",
+        "description": "8〜10 ACU（1セッション上限）",
+        "color": "FCA5A5"
+      }
+    ],
+    "number": 32,
+    "state": "OPEN",
+    "title": "ファイル添付機能"
+  },
+  {
+    "body": "## 概要\n\nコメント内で @ユーザー名 形式のメンションをサポートし、対象ユーザーに通知する。\n\n## 対応ユーザーストーリー\n\nUS-19（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] コメント入力中に `@` タイプでメンバー候補ポップアップ\n- [ ] 候補から選択 → `@ユーザー名` として挿入\n- [ ] コメント保存時に mention を検出し、対象ユーザーへ通知レコード作成\n- [ ] レンダリング時は @ユーザー名 をハイライト\n- [ ] プロジェクトメンバーのみメンション可能\n- [ ] メンション通知は #34（通知 API）と連携\n\n## 技術的な参考情報\n\n- 前提: #23（コメント CRUD）, #34（通知）\n- 仕様書: `docs/spec.md` F08 コメント / F13 通知",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZrQ",
+        "name": "phase:3",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 31,
+    "state": "OPEN",
+    "title": "コメント @メンション"
+  },
+  {
+    "body": "## 概要\n\nタスク詳細画面でコメントの投稿・編集・削除を行える機能を実装。\n\n## 対応ユーザーストーリー\n\nUS-19（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `GET /api/tasks/[taskId]/comments`: 一覧\n- [ ] `POST /api/tasks/[taskId]/comments`: 投稿（Markdown 対応）\n- [ ] `PATCH /api/comments/[commentId]`: 編集（投稿者のみ）\n- [ ] `DELETE /api/comments/[commentId]`: 削除（投稿者 or OWNER/ADMIN）\n- [ ] `src/components/comments/CommentList.tsx` + `CommentForm.tsx`\n- [ ] Markdown レンダリング（react-markdown + remark-gfm）\n- [ ] 投稿者アバター + 投稿日時表示\n- [ ] 編集履歴ラベル（編集された場合）\n- [ ] VIEWER ロールは投稿不可\n\n## 技術的な参考情報\n\n- Prisma: `Comment` モデル\n- 前提: #13（タスク詳細画面）\n- 仕様書: `docs/spec.md` F08 コメント\n- @メンション: #24 で対応",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZrQ",
+        "name": "phase:3",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 30,
+    "state": "OPEN",
+    "title": "コメント機能（CRUD）"
+  },
+  {
+    "body": "## 概要\n\nタスクにカテゴリを複数付与でき、カンバン/リストでカテゴリフィルタリングを可能にする。\n\n## 対応ユーザーストーリー\n\nUS-20（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] タスク作成/詳細でカテゴリ選択（複数可）\n- [ ] タスクカードにカテゴリバッジ表示（色付き）\n- [ ] カンバン/リストにカテゴリフィルター UI\n- [ ] 複数カテゴリの AND/OR フィルタ\n- [ ] URL クエリパラメータで状態保持（例: `?categories=bug,feature`）\n\n## 技術的な参考情報\n\n- Prisma: `TaskCategory` 中間テーブル\n- 前提: #21（カテゴリ管理）完了\n- 既存: `src/components/tasks/TaskCard.tsx`, `TaskForm.tsx`",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZnA",
+        "name": "phase:2",
+        "description": "",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 29,
+    "state": "OPEN",
+    "title": "タスクへのカテゴリ付与 + フィルタリング"
+  },
+  {
+    "body": "## 概要\n\nプロジェクトごとのカテゴリ（バグ/機能追加/改善 など）の CRUD を実装。\n\n## 対応ユーザーストーリー\n\nUS-20（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `GET /api/projects/[id]/categories`: 一覧\n- [ ] `POST /api/projects/[id]/categories`: 作成（名前 + OKLCH 色）\n- [ ] `PATCH /api/categories/[categoryId]`: 更新\n- [ ] `DELETE /api/categories/[categoryId]`: 削除\n- [ ] プロジェクト設定画面にカテゴリ管理セクション\n- [ ] OWNER / ADMIN のみ編集可能\n- [ ] カラーピッカー（OKLCH 対応）\n\n## 技術的な参考情報\n\n- Prisma: `Category` モデル\n- 既存 seed: 4カテゴリ（バグ/機能追加/改善/ドキュメント）\n- 仕様書: `docs/spec.md` F09 カテゴリ",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZnA",
+        "name": "phase:2",
+        "description": "",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa_w",
+        "name": "size:S",
+        "description": "3〜5 ACU",
+        "color": "93C5FD"
+      }
+    ],
+    "number": 28,
+    "state": "OPEN",
+    "title": "カテゴリ/ラベル管理"
+  },
+  {
+    "body": "## 概要\n\nタスクをテーブル形式で表示するリストビューを実装。ソート・フィルター機能を含む。\n\n## 対応ユーザーストーリー\n\nUS-16（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `/projects/[id]/list` ページ\n- [ ] カラム: タスク番号、タイトル、ステータス、優先度、担当者、期限、カテゴリ、作成日\n- [ ] 列ヘッダークリックでソート切替\n- [ ] フィルター UI（ステータス、優先度、担当者、カテゴリ）\n- [ ] 空状態の表示\n- [ ] カンバンとリストを切り替えるタブ/ボタン\n- [ ] レスポンシブ対応\n\n## 技術的な参考情報\n\n- 既存: `src/app/(main)/projects/[id]/board/page.tsx`\n- 仕様書: `docs/spec.md` F05 タスク一覧",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZnA",
+        "name": "phase:2",
+        "description": "",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaUA",
+        "name": "type:frontend",
+        "description": "UI・コンポーネント・画面",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 27,
+    "state": "OPEN",
+    "title": "タスク一覧（リストビュー）完成"
+  },
+  {
+    "body": "## 概要\n\nカンバンの各カラム下部に「＋」ボタンを配置し、タイトルだけでタスクを素早く作成できる機能。\n\n## 対応ユーザーストーリー\n\nUS-15（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] 各カラム下部に「＋ タスクを追加」ボタン\n- [ ] クリックでインラインテキストボックスが表示\n- [ ] Enter で作成（タイトルのみ、ステータスはカラムから決定、他はデフォルト）\n- [ ] Escape でキャンセル\n- [ ] VIEWER ロールは非表示\n\n## 技術的な参考情報\n\n- 既存: `src/lib/actions/task.ts` の `createTask` を再利用\n- 関連: #6（カンバン基本表示）",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZnA",
+        "name": "phase:2",
+        "description": "",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa4w",
+        "name": "size:XS",
+        "description": "1〜2 ACU",
+        "color": "D1D5DB"
+      }
+    ],
+    "number": 26,
+    "state": "OPEN",
+    "title": "カンバン クイック作成"
+  },
+  {
+    "body": "## 概要\n\nカンバンの同一カラム内で D&D によるタスク並び替えを実装。\n\n## 対応ユーザーストーリー\n\nUS-14（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] 同一カラム内での D&D 並び替え\n- [ ] `PATCH /api/tasks/[taskId]/sort` API 実装\n- [ ] `sortOrder` フィールドで並び順管理\n- [ ] 楽観的更新で即座に UI 反映\n- [ ] OpenAPI 仕様に準拠\n\n## 技術的な参考情報\n\n- 前提: #17（カラム間 D&D）完了後\n- Prisma: `Task.sortOrder` フィールド\n- @dnd-kit/sortable を使用",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZnA",
+        "name": "phase:2",
+        "description": "",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaUA",
+        "name": "type:frontend",
+        "description": "UI・コンポーネント・画面",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa_w",
+        "name": "size:S",
+        "description": "3〜5 ACU",
+        "color": "93C5FD"
+      }
+    ],
+    "number": 25,
+    "state": "OPEN",
+    "title": "カンバン D&D（カラム内並び替え）"
+  },
+  {
+    "body": "## 概要\n\nカンバンボード画面に @dnd-kit を導入し、カラム間 D&D でステータスを変更する。\n\n## 対応ユーザーストーリー\n\nUS-14（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `@dnd-kit/core` を導入・セットアップ\n- [ ] カラム間 D&D でステータス更新（`PATCH /api/tasks/[taskId]/status`）\n- [ ] ドラッグ中にドロップ先カラムがハイライト\n- [ ] 楽観的更新（`useOptimistic`）で即座に UI 反映\n- [ ] ステータス変更時にアクティビティログ記録（#28 と連携）\n- [ ] VIEWER ロールは D&D 不可\n- [ ] OpenAPI 仕様に準拠\n\n## 技術的な参考情報\n\n- 既存タスクカード: `src/components/tasks/TaskCard.tsx`\n- 既存カンバン: `src/components/board/KanbanBoard.tsx`\n- API パターン: `src/app/api/projects/[id]/tasks/route.ts` を参考\n- 仕様書: `docs/spec.md` F04 カンバンボード\n- カラム内並び替え: #18 で対応",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZnA",
+        "name": "phase:2",
+        "description": "",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaUA",
+        "name": "type:frontend",
+        "description": "UI・コンポーネント・画面",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 24,
+    "state": "OPEN",
+    "title": "カンバン D&D（カラム間ステータス変更）"
+  },
+  {
+    "body": "## 概要\n\nタスクにサブタスク（親子関係）を付与できる機能を実装。\n\n## 対応ユーザーストーリー\n\nUS-12（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `GET /api/tasks/[taskId]/subtasks`: サブタスク一覧\n- [ ] `POST /api/tasks/[taskId]/subtasks`: サブタスク作成\n- [ ] タスク詳細画面にサブタスクセクション（一覧 + 追加フォーム）\n- [ ] サブタスク完了数/総数の進捗表示（例: 2/5）\n- [ ] 親タスクからサブタスク詳細へ遷移可能\n- [ ] サブタスク自身も通常のタスクとして詳細画面を持つ\n\n## 技術的な参考情報\n\n- Prisma: `Task.parentTaskId` フィールド\n- 関連: #13（タスク詳細画面）\n- 仕様書: `docs/spec.md` F03",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZnA",
+        "name": "phase:2",
+        "description": "",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 23,
+    "state": "OPEN",
+    "title": "サブタスク機能"
+  },
+  {
+    "body": "## 概要\n\nタスク削除機能を実装。CASCADE で関連データ（コメント・添付・サブタスク）も削除される。\n\n## 対応ユーザーストーリー\n\nUS-11（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `DELETE /api/tasks/[taskId]` API 実装\n- [ ] 削除ボタン + 確認ダイアログ（タスク詳細画面に配置）\n- [ ] VIEWER ロールは削除不可（権限チェック）\n- [ ] 削除後はカンバン/リストから即座に消える（`revalidatePath`）\n- [ ] 関連データ（コメント・添付・サブタスク）が CASCADE で削除\n- [ ] sonner でトースト通知\n\n## 技術的な参考情報\n\n- Prisma: `onDelete: Cascade` 設定済み\n- 関連: #13（タスク詳細画面）",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZnA",
+        "name": "phase:2",
+        "description": "",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaDA",
+        "name": "priority:medium",
+        "description": "",
+        "color": "F59E0B"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa4w",
+        "name": "size:XS",
+        "description": "1〜2 ACU",
+        "color": "D1D5DB"
+      }
+    ],
+    "number": 22,
+    "state": "OPEN",
+    "title": "タスク削除"
+  },
+  {
+    "body": "## 概要\n\nタスク詳細画面で各フィールドをインライン編集できる UI を実装。\n\n## 対応ユーザーストーリー\n\nUS-10（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] タイトル、説明、ステータス、優先度、担当者、期限をクリックしてその場で編集\n- [ ] 変更は即座に保存（Server Action + `useOptimistic`）\n- [ ] 失敗時はロールバック + トースト通知\n- [ ] VIEWER ロールは編集ボタン非表示\n- [ ] エスケープキーでキャンセル、Enter/Blur で保存\n\n## 技術的な参考情報\n\n- 関連: #13（タスク詳細画面）\n- 楽観的更新: `useOptimistic` フック\n- コーディング規約: `.windsurf/rules/coding-rule.md`（楽観的更新パターン）",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZnA",
+        "name": "phase:2",
+        "description": "",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaUA",
+        "name": "type:frontend",
+        "description": "UI・コンポーネント・画面",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa_w",
+        "name": "size:S",
+        "description": "3〜5 ACU",
+        "color": "93C5FD"
+      }
+    ],
+    "number": 21,
+    "state": "OPEN",
+    "title": "タスクのインライン編集"
+  },
+  {
+    "body": "## 概要\n\nタスク詳細画面を実装し、全フィールドと関連情報（コメント、アクティビティ、添付など）を表示する。\n\n## 対応ユーザーストーリー\n\nUS-10（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `/projects/[id]/tasks/[taskId]`（もしくはモーダル）で詳細画面表示\n- [ ] 表示項目: タイトル、説明（Markdown）、ステータス、優先度、担当者、起票者、期限、カテゴリ、タスク番号、作成日時\n- [ ] `GET /api/tasks/[taskId]` API 実装\n- [ ] `PATCH /api/tasks/[taskId]` API 実装（権限チェック含む）\n- [ ] Markdown レンダリング（`react-markdown` + `remark-gfm`）\n- [ ] 関連タスク（サブタスク・親タスク）セクション（#16 で拡張）\n- [ ] アクティビティ表示エリア（#28 で拡張）\n\n## 技術的な参考情報\n\n- Prisma: `Task` モデルと関連リレーション\n- 仕様書: `docs/spec.md` F03 タスク管理",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZnA",
+        "name": "phase:2",
+        "description": "",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 20,
+    "state": "OPEN",
+    "title": "タスク詳細画面"
+  },
+  {
+    "body": "## 概要\n\nプロジェクト OWNER/ADMIN が既存メンバーの権限変更・削除を行える機能。\n\n## 対応ユーザーストーリー\n\nUS-08（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `PATCH /api/projects/[id]/members/[memberId]`: 権限変更（ADMIN / MEMBER / VIEWER）\n- [ ] `DELETE /api/projects/[id]/members/[memberId]`: メンバー削除\n- [ ] OWNER は削除・変更不可（最低1人必要）\n- [ ] 自分自身の権限変更は不可\n- [ ] メンバー一覧画面で UI 操作が可能\n- [ ] 変更即時反映（`revalidatePath`）\n- [ ] 統一エラーレスポンス\n\n## 技術的な参考情報\n\n- 仕様書: `docs/spec.md` F02\n- 関連: #11（メンバー招待）",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZnA",
+        "name": "phase:2",
+        "description": "",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa_w",
+        "name": "size:S",
+        "description": "3〜5 ACU",
+        "color": "93C5FD"
+      }
+    ],
+    "number": 19,
+    "state": "OPEN",
+    "title": "プロジェクトメンバー権限管理"
+  },
+  {
+    "body": "## 概要\n\nプロジェクト OWNER/ADMIN がメールアドレスでメンバーを招待できる機能を実装。\n\n## 対応ユーザーストーリー\n\nUS-07（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `POST /api/projects/[id]/members`: メンバー招待 API\n  - 登録済みユーザーをメールで検索して追加\n  - 権限（ADMIN / MEMBER / VIEWER）を指定\n  - OWNER / ADMIN のみ実行可能\n- [ ] `/projects/[id]/members` 画面: メンバー一覧 + 招待フォーム\n- [ ] 既に参加中のユーザーは追加できない（バリデーション）\n- [ ] 招待されたメンバーのプロジェクト一覧に即座に表示される（`revalidatePath`）\n- [ ] zod バリデーション、統一エラーレスポンス\n\n## 技術的な参考情報\n\n- 仕様書: `docs/spec.md` F02 プロジェクト管理\n- Prisma: `ProjectMember` モデル\n- 既存: `src/app/api/projects/[id]/tasks/route.ts` の権限チェックを参考",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZnA",
+        "name": "phase:2",
+        "description": "",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBalA",
+        "name": "type:fullstack",
+        "description": "フロントエンドとバックエンド両方",
+        "color": "8B5CF6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 18,
+    "state": "OPEN",
+    "title": "プロジェクトメンバー招待"
+  },
+  {
+    "body": "## 概要\n\nプロジェクトの一覧・作成・設定画面の UI を実装する。\n\n## 対応ユーザーストーリー\n\nUS-04, US-05, US-06（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `/projects`: プロジェクトカード一覧（既存の最小実装を改善）\n  - タスク数、メンバー数、プロジェクトキー、アバター表示\n  - 作成ボタン配置\n- [ ] `/projects/new`: プロジェクト作成フォーム\n  - 名前、説明、アイコン色を入力\n  - キーは名前から自動生成（編集可）\n  - Server Actions + zod + useActionState\n- [ ] `/projects/[id]/settings`: プロジェクト設定画面（OWNER のみ）\n  - 名前・説明・キー編集\n  - プロジェクト削除ボタン（確認ダイアログ）\n- [ ] OWNER / ADMIN / MEMBER / VIEWER で表示・操作が切り替わる\n- [ ] sonner でトースト通知\n\n## 技術的な参考情報\n\n- API: #9 で実装した `/api/projects`\n- 既存ページ: `src/app/(main)/projects/page.tsx`\n- 仕様書: `docs/spec.md` F02 プロジェクト管理\n- コーディング規約: `.windsurf/rules/coding-rule.md`",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZEQ",
+        "name": "phase:1",
+        "description": "",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaUA",
+        "name": "type:frontend",
+        "description": "UI・コンポーネント・画面",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 17,
+    "state": "OPEN",
+    "title": "プロジェクト UI（一覧・作成・設定）"
+  },
+  {
+    "body": "## 概要\n\nプロジェクトの CRUD API（GET / POST / PATCH / DELETE）を実装する。\n\n## 対応ユーザーストーリー\n\nUS-04, US-05, US-06（`docs/user-stories.md` 参照）\n\n## Acceptance Criteria\n\n- [ ] `GET /api/projects`: 自分が参加しているプロジェクト一覧\n- [ ] `POST /api/projects`: プロジェクト作成（キー自動生成、作成者を OWNER に登録）\n- [ ] `GET /api/projects/[id]`: プロジェクト詳細\n- [ ] `PATCH /api/projects/[id]`: プロジェクト更新（OWNER / ADMIN のみ）\n- [ ] `DELETE /api/projects/[id]`: プロジェクト削除（OWNER のみ、CASCADE で関連データも削除）\n- [ ] zod バリデーション必須\n- [ ] 統一エラーレスポンス（`{ error: { code, message } }`）\n- [ ] ステータスコード: 400 / 401 / 403 / 404 を適切に返す\n- [ ] OpenAPI 仕様に準拠\n\n## 技術的な参考情報\n\n- 既存 API: `src/app/api/projects/[id]/tasks/route.ts` を参考\n- Prisma スキーマ: `prisma/schema.prisma`\n- 仕様書: `docs/spec.md` F02 プロジェクト管理\n- コーディング規約: `.windsurf/rules/coding-rule.md`",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZEQ",
+        "name": "phase:1",
+        "description": "",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBaeQ",
+        "name": "type:backend",
+        "description": "API・DB・Server Actions",
+        "color": "10B981"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBbDw",
+        "name": "size:M",
+        "description": "5〜8 ACU",
+        "color": "6EE7B7"
+      }
+    ],
+    "number": 16,
+    "state": "OPEN",
+    "title": "プロジェクト CRUD API"
+  },
+  {
+    "body": "## 概要\n\n全 API エンドポイントを OpenAPI 3.1 形式で定義し、`docs/openapi.yaml` に配置する。\n\n## Acceptance Criteria\n\n- [ ] OpenAPI 3.1 形式で `docs/openapi.yaml` を作成\n- [ ] 全エンドポイント（`docs/spec.md` の「API 設計」セクション参照）を記載\n- [ ] リクエスト/レスポンススキーマを定義（zod スキーマに対応）\n- [ ] エラーレスポンスの統一フォーマット（`{ error: { code, message } }`）を定義\n- [ ] 認証（session-based）を securitySchemes に定義\n- [ ] `README.md` から OpenAPI 仕様へのリンクを追加\n\n## 技術的な参考情報\n\n- API 設計: `docs/spec.md` の「API 設計」セクション\n- OpenAPI 3.1: https://spec.openapis.org/oas/v3.1.0\n- 既存の zod スキーマ: `src/lib/validations/`",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZEQ",
+        "name": "phase:1",
+        "description": "",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa1w",
+        "name": "type:docs",
+        "description": "ドキュメント",
+        "color": "0EA5E9"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa_w",
+        "name": "size:S",
+        "description": "3〜5 ACU",
+        "color": "93C5FD"
+      }
+    ],
+    "number": 15,
+    "state": "OPEN",
+    "title": "OpenAPI 仕様の作成"
+  },
+  {
+    "body": "## 概要\n\nDB 設計を可視化する ERD 図を Mermaid 形式で作成し、`docs/erd.md` に配置する。\n\n## Acceptance Criteria\n\n- [ ] Mermaid の `erDiagram` 構文で全11テーブルの ERD 図を作成\n- [ ] テーブル間のリレーション（1:N、N:N）を正確に表現\n- [ ] 各テーブルの主要カラム（PK、FK、重要フィールド）を記載\n- [ ] `docs/erd.md` に配置し、`README.md` からリンク\n- [ ] GitHub 上で Mermaid がレンダリングされることを確認\n\n## 技術的な参考情報\n\n- Prisma スキーマ: `prisma/schema.prisma`\n- DB 設計: `docs/spec.md` の「DB 設計」セクション\n- Mermaid erDiagram: https://mermaid.js.org/syntax/entityRelationshipDiagram.html",
+    "labels": [
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZEQ",
+        "name": "phase:1",
+        "description": "",
+        "color": "3B82F6"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBZ7Q",
+        "name": "priority:high",
+        "description": "",
+        "color": "DC2626"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa1w",
+        "name": "type:docs",
+        "description": "ドキュメント",
+        "color": "0EA5E9"
+      },
+      {
+        "id": "LA_kwDOSEXDPs8AAAACfqBa4w",
+        "name": "size:XS",
+        "description": "1〜2 ACU",
+        "color": "D1D5DB"
+      }
+    ],
+    "number": 14,
+    "state": "OPEN",
+    "title": "ERD図の作成（Mermaid）"
+  }
+]
